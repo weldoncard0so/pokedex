@@ -7,11 +7,18 @@
 
 ### Maven
 ### Java 17
+### Postman
 
-# Executar
+# Executar testes automatizados
 
-### ----
-### ----
+````
+mvn test -P dev
+````
+### Empacotar dependências
+
+````
+mvn package -DskipTests
+````
 
 # Postman
 
