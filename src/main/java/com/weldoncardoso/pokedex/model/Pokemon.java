@@ -19,16 +19,26 @@ public class Pokemon {
 
     private Double peso;
 
+    private String descricao;
+
+    private String genero;
+
     public Pokemon(){
         super();
     }
 
-    public Pokemon(String id, String nomePokemon, String categoria, String habilidades, Double peso) {
+    public Pokemon(String id, String nomePokemon, String categoria, String habilidades, Double peso, String descricao, String genero) {
         this.id = id;
         this.nomePokemon = nomePokemon;
         this.categoria = categoria;
         this.habilidades = habilidades;
         this.peso = peso;
+        this.descricao = descricao;
+        this.genero = genero;
+    }
+
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -36,36 +46,17 @@ public class Pokemon {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pokemon pokemon = (Pokemon) o;
-        return Objects.equals(id, pokemon.id) &&
-                Objects.equals(nomePokemon, pokemon.nomePokemon) &&
-                Objects.equals(categoria, pokemon.categoria) &&
-                Objects.equals(habilidades, pokemon.habilidades) &&
-                Objects.equals(peso, pokemon.peso);
+        return Objects.equals(getId(), pokemon.getId()) && Objects.equals(getNomePokemon(), pokemon.getNomePokemon()) && Objects.equals(getCategoria(), pokemon.getCategoria()) && Objects.equals(getHabilidades(), pokemon.getHabilidades()) && Objects.equals(getPeso(), pokemon.getPeso()) && Objects.equals(getDescricao(), pokemon.getDescricao()) && Objects.equals(getGenero(), pokemon.getGenero());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNomePokemon(), getCategoria(), getHabilidades(), getPeso(), getDescricao(), getGenero());
     }
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nomePokemon, categoria, habilidades, peso);
-    }
-
-    @Override
-    public String toString() {
-        return "Pokemon{" +
-                "id='" + id + '\'' +
-                ", nomePokemon='" + nomePokemon + '\'' +
-                ", categoria='" + categoria + '\'' +
-                ", habilidades='" + habilidades + '\'' +
-                ", peso=" + peso +
-                '}';
-    }
-
-    public String getId() {
-        return id;
     }
 
     public void setId(String id) {
@@ -102,6 +93,35 @@ public class Pokemon {
 
     public void setPeso(Double peso) {
         this.peso = peso;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    @Override
+    public String toString() {
+        return "Pokemon{" +
+                "id='" + id + '\'' +
+                ", nomePokemon='" + nomePokemon + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", habilidades='" + habilidades + '\'' +
+                ", peso=" + peso +
+                ", descricao='" + descricao + '\'' +
+                ", genero='" + genero + '\'' +
+                '}';
     }
 }
 

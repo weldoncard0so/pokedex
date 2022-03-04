@@ -36,6 +36,23 @@ public class PokemonController {
         return repository.save(pokemon);
     }
 
+    @PutMapping("{id}")
+    public Mono<ResponseEntity<Pokemon>> updatePokemon(@PathVariable(value = "id") String id,
+                                                       @RequestBody Pokemon pokemon){
+        return repository.findById(id)
+                .flatMap(existingPokemon -> {
+                    existingPokemon.setNomePokemon(pokemon.getNomePokemon());
+                    existingPokemon.setCategoria(pokemon.getCategoria());
+                    existingPokemon.setHabilidades(pokemon.getHabilidades());
+                    existingPokemon.setPeso(pokemon.getPeso());
+                    existingPokemon.setDescricao(pokemon.getDescricao());
+                    existingPokemon.setGenero(pokemon.getGenero());
+                    return repository.save(existingPokemon);
+                })
+                .map(updatePokemon -> ResponseEntity.ok(updatePokemon))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("{id}")
     public Mono<ResponseEntity<Void>> deletePokemon(@PathVariable(value = "id") String id) {
         return repository.findById(id)
@@ -46,5 +63,8 @@ public class PokemonController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-    
+    @DeleteMapping
+    public Mono<Void> deleteAllPokemons(){
+        return repository.deleteAll();
+    }
 }
